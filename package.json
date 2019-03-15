@@ -1,0 +1,14 @@
+{
+  "name": "mainrest-agent",
+  "version": "1.0.0",
+  "author": "Nikolay Turov",
+  "license": "ISC",
+  "dependencies": {
+    "child-process-promise": "^2.2.1",
+    "dotenv": "^5.0.1",
+    "path": "^0.12.7",
+    "socket.io-client": "^2.1.1",
+    "url": "^0.11.0",
+    "winston": "^2.4.0"
+  }
+}
