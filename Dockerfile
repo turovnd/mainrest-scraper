@@ -20,8 +20,8 @@ RUN npm install
 ENTRYPOINT xvfb-run --server-args="-screen 9 1280x2000x24" node index.js
 
 # Help
-# docker build -t agent .
-# docker run --name Agent_1 -v ~/plugins/:/var/plugins -d -it agent
+# docker build -t scraper .
+# docker run --name Scraper_1 -v ~/plugins/:/var/plugins -d -it scraper
 
 # Stop/delete all containers
 # docker stop $(docker ps -a -q)
