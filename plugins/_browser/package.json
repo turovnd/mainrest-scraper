@@ -1,5 +1,5 @@
 {
-  "name": "mainrest-scraping",
+  "name": "mainrest-plugin-scraping",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
