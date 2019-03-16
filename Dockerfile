@@ -7,22 +7,19 @@ RUN apt-get update &&\
 RUN mkdir /var/agent
 RUN mkdir /var/plugins
 
+WORKDIR /var
+
+COPY plugins plugins
+COPY plugins.sh plugins.sh
+
+RUN /bin/bash plugins.sh
+
 WORKDIR /var/agent
 
 COPY modules modules
 COPY index.js index.js
 COPY package.json package.json
-COPY .env .env
-COPY .gitignore .gitignore
 
 RUN npm install
 
 ENTRYPOINT xvfb-run --server-args="-screen 9 1280x2000x24" node index.js
-
-# Help
-# docker build -t scraper .
-# docker run --name Scraper_1 -v ~/plugins/:/var/plugins -d -it scraper
-
-# Stop/delete all containers
-# docker stop $(docker ps -a -q)
-# docker rm $(docker ps -a -q)

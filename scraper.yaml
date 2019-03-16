@@ -1,0 +1,34 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: scraper-deployment
+  labels:
+    app: scraper
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scraper
+  template:
+    metadata:
+      labels:
+        app: scraper
+    spec:
+      containers:
+      - name: scraper
+        image: mainrest.azurecr.io/scrapers:v1
+        ports:
+          - containerPort: 443
+        env:
+        - name: MR_PROXY_WEBSITE
+          value: "https://proxy.mainrest.ru"
+        - name: AGENT_RESPONSE_TIMEOUT
+          value: "30000"
+        - name: AGENT_BROWSER_TIMEOUT
+          value: "1000"
+        - name: AGENT_BROWSER_TIMES
+          value: "32"
+        - name: AGENT_PROXY_SERVER
+          value: ""
+      imagePullSecrets:
+      - name: acr-auth

@@ -1,15 +1,11 @@
 version: "3"
 services:
-  scraper:
-    name: MRscraper
-    image: scrapers.azurecr.io/scraper:v1
+  scrapers:
+    container_name: scraper
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./plugins:/var/plugins
     environment:
-      - NODE_ENV=production
       - MR_PROXY_WEBSITE=https://proxy.mainrest.ru
       - AGENT_RESPONSE_TIMEOUT=30000
       - AGENT_BROWSER_TIMEOUT=1000
