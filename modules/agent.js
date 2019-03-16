@@ -20,7 +20,7 @@ const ENV = {
 let execPlugin_ = (pluginId, params) => {
     return new Promise(resolve => {
         // Формируем путь до плагина.
-        let scriptPath = path.join(__dirname, "..", "plugins", pluginId, "index.js");
+        let scriptPath = path.join(__dirname, "..", "..", "plugins", pluginId, "index.js");
 
         /**
          * Формируем массив параметров для запуска плагина.
@@ -42,8 +42,8 @@ let execPlugin_ = (pluginId, params) => {
                 if (!result.stderr) {
                     resolve({ response: JSON.parse(result.stdout) });
                 } else {
-                    logger.error('[Error] ' + result.stderr);
-                    resolve({ error: '[Error] ' + result.stderr });
+                    logger.error(result.stderr);
+                    resolve({ error: result.stderr });
                 }
             })
             .catch(err => {

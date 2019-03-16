@@ -1,12 +1,11 @@
 version: "3"
 services:
   scrapers:
-    container_name: scraper
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      - MR_PROXY_WEBSITE=http://localhost:3017
+      - MR_PROXY_WEBSITE=https://proxy.mainrest.ru
       - AGENT_RESPONSE_TIMEOUT=30000
       - AGENT_BROWSER_TIMEOUT=1000
       - AGENT_BROWSER_TIMES=32

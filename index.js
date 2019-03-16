@@ -33,14 +33,21 @@ let getSocket_ = () => {
  * Initialize agent.
  */
 let init = () => {
-    logger.info('Agent was connected');
+    logger.info('Agent was initialized');
 
     let socket = getSocket_();
 
-    socket.emit('new agent');
+    socket.on('connect', function() {
+        logger.info('Agent was connected');
+        socket.emit('new agent');
+    });
 
     socket.on('handle query', async (query, response) => {
-        response( await Agent.handleQuery(query) );
+        let start = +new Date();
+        logger.info("Start  task: " + query.pluginId);
+        let result = await Agent.handleQuery(query);
+        logger.info("Finish task: " + (+new Date() - start)/1000 + " sec");
+        response( result );
     });
 
     socket.on('reconnect', attempt => {
@@ -50,8 +57,8 @@ let init = () => {
 
     socket.on('disconnect', status =>  {
         logger.info('Agent was disconnected [' + status + ']');
+        process.exit(1)
     });
 };
-
 
 init();
