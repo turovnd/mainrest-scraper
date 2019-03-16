@@ -39,12 +39,8 @@ let init = () => {
 
     socket.emit('new agent');
 
-    socket.on('new task', async query => {
-        let start = +new Date();
-        logger.info("Start  task: " + query.pluginId);
-        let response = await Agent.handleQuery(query);
-        logger.info("Finish task: " + (+new Date() - start)/1000 + " sec");
-        socket.emit("task output", response);
+    socket.on('handle query', async (query, response) => {
+        response( await Agent.handleQuery(query) );
     });
 
     socket.on('reconnect', attempt => {
