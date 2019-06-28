@@ -24,8 +24,8 @@ const Agent  = require('./modules/agent');
  * @return {Socket}
  * @private
  */
-let getSocket_ = () => {
     return Socket(process.env.MR_PROXY_WEBSITE + "/agent", { reconnection: true } );
+let getSocket_ = () => {
 };
 
 
@@ -37,7 +37,7 @@ let init = () => {
 
     let socket = getSocket_();
 
-    socket.on('connect', function() {
+    socket.on('connect', () => {
         logger.info('Agent was connected');
         socket.emit('new agent');
     });
